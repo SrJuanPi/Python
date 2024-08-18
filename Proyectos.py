@@ -1,6 +1,6 @@
 # Resumen de mis 5 proyectos hasta ahora
 
-from Python import Calculadora as cl,IMC as imc,Rentabilidad as rent,Temperaturas as temp,Velocidad as v
+from Python import Calculadora as cl, IMC as imc, Rentabilidad as rent, Temperaturas as temp, Velocidad as v # type: ignore
 
 print()
 print("Bienvenido, mi nombre es Juan y eh estado aprendiendo a programar en Python últimamente")

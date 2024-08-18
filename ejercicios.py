@@ -23,15 +23,11 @@
 
 # Ejercicio 6
 # edad = int(input("Ingrese su edad: "))
-# if edad>=18:
-#     print("Eres mayor de edad")
-# elif edad<18:
-#     print("Eres menor de edad")
+# if edad>=18: print("Eres mayor de edad")
+# elif edad<18: print("Eres menor de edad")
 
 # Ejercicio 7
-contraseña = "hola123xd"
-verificar = input("Ingrese la contraseña: ")
-if contraseña==verificar.lower():
-    print("Ambas contraseñas coinciden")
-else:
-    print("Las contraseñas no coinciden")
+# contraseña = "hola123xd"
+# verificar = input("Ingrese la contraseña: ")
+# if contraseña==verificar.lower(): print("Ambas contraseñas coinciden")
+# else: print("Las contraseñas no coinciden")
