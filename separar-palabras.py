@@ -1,6 +1,6 @@
-# Separar las palabras de un texto
+# Separar las words de un texto
 
 texto = input("ingrese texto: ")
-palabras = texto.split()
-cantidad = len(palabras)
-print(f"Palabras Separadas: {palabras}\nCantidad de Palabras: {cantidad}")
+words = texto.split()
+cantidad = len(words)
+print(f"words Separadas: {words}\nCantidad de words: {cantidad}")

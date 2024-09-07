@@ -1,10 +1,10 @@
-# Resumen de mis 5 proyectos hasta ahora
+# Resumen de mis 5 proyectos hasta now
 
-from Python import Calculadora as cl, IMC as imc, Rentabilidad as rent, Temperaturas as temp, Velocidad as v # type: ignore
+from Python import Calculadora as cl, bmi as bmi, Rentabilidad as rent, Temperaturas as temp, Velocidad as v # type: ignore
 
 print()
 print("Bienvenido, mi nombre es Juan y eh estado aprendiendo a programar en Python últimamente")
-print("Estos son 5 de mis proyectos más recientes hasta ahora, son programas sencillos pero funcionales")
+print("Estos son 5 de mis proyectos más recientes hasta now, son programas sencillos pero funcionales")
 print("Cabe aclarar que no son programas perfectos, pueden haber pequeños errores.")
 print()
 
@@ -23,9 +23,9 @@ print()
 rent.rentabilidad()
 print()
 
-print("En esta ocasión quería saber como estaba mi estado físico actual, y para ello creé una Calculadora IMC.")
+print("En esta ocasión quería saber como estaba mi estado físico actual, y para ello creé una Calculadora bmi.")
 print()
-imc.imc()
+bmi.bmi()
 print()
 
 print("Y por último tenemos un Calculador de Velocidad.")

@@ -9,8 +9,8 @@ while True:
 
 lista = [] # Lista final de compras con todos los detalles.
 
-# Sumar los precios a medida que se añaden
-def suma_precios(lista):
+# addr los precios a medida que se añaden
+def add_precios(lista):
     total = 0
     for producto in lista:
         total += producto['precio'] * producto['cantidad']
@@ -33,8 +33,8 @@ while True:
 
     # Se añaden los datos del producto a la lista
     lista.append({'nombre': producto, 'precio': precio, 'cantidad': cantidad})
-    # Se suman los precios a medida que se añaden para llevar la cuenta
-    print(f"Precio Total: {suma_precios(lista)}")
+    # Se addn los precios a medida que se añaden para llevar la cuenta
+    print(f"Precio Total: {add_precios(lista)}")
 
 
 # Mostramos la lista completa de productos con sus detalles.
@@ -43,11 +43,11 @@ for producto in lista:
 
 
 # Verificamos si el usuario puede pagar o no la compra
-if suma_precios(lista) <= dinero_disponible:
-    print(f"\nEl precio total es: {suma_precios(lista)} y te sobran {abs(dinero_disponible - suma_precios(lista))}")
+if add_precios(lista) <= dinero_disponible:
+    print(f"\nEl precio total es: {add_precios(lista)} y te sobran {abs(dinero_disponible - add_precios(lista))}")
 
-elif suma_precios(lista) > dinero_disponible:
-    print(f"\nNo tienes para pagarlo, te faltan {abs(dinero_disponible - suma_precios(lista))}")
+elif add_precios(lista) > dinero_disponible:
+    print(f"\nNo tienes para pagarlo, te faltan {abs(dinero_disponible - add_precios(lista))}")
 
 
 

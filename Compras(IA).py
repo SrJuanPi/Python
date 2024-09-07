@@ -1,6 +1,6 @@
 # Codigo base de la lista de compras generado por Inteligencia Artificial.
 
-def suma_precios(lista_de_compras):
+def add_precios(lista_de_compras):
     total = 0
     for producto in lista_de_compras:
         total += producto['precio'] * producto['cantidad']
@@ -31,4 +31,4 @@ for producto in lista_de_compras:
     print(f"Producto: {producto['nombre']}, Precio: {producto['precio']}, Cantidad: {producto['cantidad']}")
 
 # Imprimir el total de los precios
-print(f"El total de los precios es: {suma_precios(lista_de_compras)}")
+print(f"El total de los precios es: {add_precios(lista_de_compras)}")

@@ -37,4 +37,4 @@ while True:
 
 dia_del_año = dias_por_mes(mes, bisiesto) + dia
 total_dias = 366 if bisiesto else 365
-print(f"Fecha: {fecha}\nDía del año: {dia_del_año} de {total_dias}\nDías restantes: {total_dias - dia_del_año}")
+print(f"Fecha: {fecha}\nDía del año: {dia_del_año} de {total_dias}\nDías subntes: {total_dias - dia_del_año}")

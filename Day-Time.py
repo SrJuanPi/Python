@@ -1,12 +1,12 @@
-# Cómo obtener el día y la fecha actuales, con el módulo DateTime
+# How to get the current day and date, using the DateTime module
 
 import datetime as dt
 
-ahora = dt.datetime.now()
-print(ahora)
-print(type(ahora))
+now = dt.datetime.now()
+print(now)
+print(type(now))
 
-# Con este método podemos cambiar a nuestro antojo la forma en que aparece la fecha y hora
-# Muy importante si son mayúsculas o minúsculas pueden joder todo
-print(ahora.strftime('%d/%m/%Y %H:%M:%S'))
-print(ahora.strftime('%d/%m/%y %H:%M:%S')) # Simplifica el año de 4 dígitos a solo 2
+# With this method we can change the way the date and time appear as we wish.
+# Very important if they are uppercase or lowercase they can screw everything up
+print(now.strftime('%d/%m/%Y %H:%M:%S'))
+print(now.strftime('%d/%m/%y %H:%M:%S')) # Simplify the 4-digit year to just 2

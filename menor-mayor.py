@@ -1,4 +1,4 @@
-# Ordenar una lista de numeros de menor a mayor (y viceversa)
+# Ordenar una lista de numbers de menor a mayor (y viceversa)
 
 lista = [1,23,4,5,236,63,573,57,56]
 lista.sort()
