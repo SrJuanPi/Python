@@ -30,8 +30,8 @@
 
 # Ejercicio 7
 contraseña = "hola123xd"
-verificar = input("Ingrese la contraseña: ")
-if contraseña==verificar.lower():
+verify = input("Ingrese la contraseña: ")
+if contraseña==verify.lower():
     print("Ambas contraseñas coinciden")
 else:
     print("Las contraseñas no coinciden")
