@@ -1,7 +1,6 @@
 # Crear un programa que transforme horas en minutos, y viceversa (si puedo)
 import re
 
-
 while True:
     tiempo = input("Ingrese el tiempo en horas o minutos: ")
     formato_hora = r"\d{1,}:\d{1,2}"
