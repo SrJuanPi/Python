@@ -1,4 +1,4 @@
-from list import *
+# from list import *
 
 # jsonfile = input("insert json file: ")
 # tasks = to_dict(jsonfile)
@@ -39,11 +39,17 @@ from list import *
 #     else: continue
 
 
-while True:
-    jsonfile = input("Enter the list with .json: ")
-    try: tasks = to_dict(jsonfile)
-    except:
-        print("Try again.")
-        continue
-    else: break
-print(view_list(tasks))
+# while True:
+#     jsonfile = input("Enter the list with .json: ")
+#     try: tasks = to_dict(jsonfile)
+#     except:
+#         print("Try again.")
+#         continue
+#     else: break
+# print(view_list(tasks))
+
+dic = {"comer":"done", "lavar":"pending", "salir":"done"}
+
+for key in dic:
+    dic[key] = "pending"
+print(dic)
