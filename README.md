@@ -1,3 +1,3 @@
 # Python-files
-Todos mis programas creados en Python a lo largo de mi aprendizaje
-Hay desde calculadoras simples como transformar la temperatura de Celsius a Farenheit hasta programas más complejos como una IA que resuelve cualquier laberinto.
+All my programs created in Python throughout my learning
+There are everything from simple calculators such as transforming the temperature from Celsius to Fahrenheit to more complex programs such as an AI that solves any maze.
