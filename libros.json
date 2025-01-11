@@ -1,23 +1,31 @@
 {
+    "_id": "libros",
+    "Padre Rico, Padre Pobre": [
+        "Robert Kiyosaki",
+        200,
+        200,
+        "leido",
+        "finanzas"
+    ],
     "Habitos Atomicos": [
         "James Clear",
         324,
         324,
-        "Leido",
-        "Productividad"
+        "leido",
+        "productividad"
     ],
     "Los 7 Habitos": [
         "Stephen Covey",
         249,
         425,
-        "En Progreso",
-        "Productividad"
+        "en progreso",
+        "productividad"
     ],
     "Como Ganar Amigos": [
         "Dale Carnegie",
         180,
         180,
-        "Pendiente",
-        "Relaciones Sociales"
+        "pendiente",
+        "relaciones"
     ]
 }

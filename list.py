@@ -56,7 +56,7 @@ def reset(dic): # all as pending by default
 def view_list(dic):
     to_str = str(dic)
     formatted = to_str.replace("{", "\n ").replace("}", "").replace("'", "").replace(",", "\n")
-    return formatted        
+    return formatted
         
 def save_list(dic, jsonfile):
     with open(jsonfile, 'w') as file:
