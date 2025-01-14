@@ -313,7 +313,7 @@ def main():
     1) Añadir           5) Leidos
     2) Eliminar         6) En Progreso
     3) Modificar        7) Pendientes
-    4) Lista Completa   8) Filtrar
+    4) Filtrar          8) Lista (Completa de Libros)
     
     salir | opciones | guardar
 """
@@ -358,19 +358,27 @@ def main():
             eliminar(libros)
         elif opcion == "3" or opcion == "modificar":
             modificar(libros)
-        elif opcion == "4" or opcion == "lista completa":
-            lista_completa(libros)
+        elif opcion == "4" or opcion == "filtrar":
+            filtrar(libros)
         elif opcion == "5" or opcion == "leidos":
             leidos(libros)
         elif opcion == "6" or opcion == "en progreso":
             en_progreso(libros)
         elif opcion == "7" or opcion == "pendientes":
             pendientes(libros)
-        elif opcion == "8" or opcion == "filtrar":
-            filtrar(libros)
+        elif opcion == "8" or opcion == "lista":
+            lista_completa(libros)
         elif opcion == "salir":
-            print("Hasta luego.")
-            return
+            seguridad = input("¿Deseas guardar antes de salir?: ")
+            if seguridad == "sí":
+                save_list(libros, jsonfile)
+                print("Guardado.")
+                print("Hasta luego.")
+            elif seguridad == "no":
+                print("Cambios no guardados.")
+                print("Hasta luego.")
+            else:print("Opción no válida.")
+            break
         elif opcion == "opciones":
             print(opciones)
         elif opcion == "guardar":
@@ -382,3 +390,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+# Programa terminado, falta añadir las mejoras y opciones que se mencionan en los comentarios.
+# Se puede mejorar el código y la interfaz de usuario.
+# Se puede añadir más opciones y funciones. Como guardado automático, libros recientes,
+# interfaz bonita como porcentajes de lectura, etc.
+# Pero en general el programa funciona como se espera y cumple con los requisitos.
+# Hay que mejorar la consistencia y manejo de errores, así como la interfaz de usuario.
+# En fin, doy este programa por terminado.

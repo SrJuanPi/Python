@@ -14,25 +14,32 @@
         "leido",
         "productividad"
     ],
-    "Los 7 Habitos": [
-        "Stephen Covey",
-        249,
-        425,
-        "en progreso",
-        "productividad"
-    ],
-    "Como Ganar Amigos": [
-        "Dale Carnegie",
-        180,
-        180,
-        "pendiente",
-        "relaciones"
-    ],
     "Como Hacerse Inolvidable": [
         "Dale Carnegie",
         200,
         200,
         "pendiente",
         "relaciones"
+    ],
+    "Los 7 Habitos de la Gente Altamente Efectiva": [
+        "Stephen Covey",
+        249,
+        425,
+        "en progreso",
+        "productividad"
+    ],
+    "Como Ganar Amigos e Influir Sobre Las Personas": [
+        "Dale Carnegie",
+        180,
+        180,
+        "pendiente",
+        "relaciones"
+    ],
+    "Flow": [
+        "Mih\u00e1ly Cs\u00edkszentmih\u00e1lyi",
+        "0",
+        "448",
+        "pendiente",
+        "felicidad"
     ]
 }
