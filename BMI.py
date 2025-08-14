@@ -1,38 +1,31 @@
-# Body Mass Index Calculator
+from tkinter import *
+from PIL import Image, ImageColor, ImageTk
+import os
 
-def bmi():
-    print("BMI Calculator")
+# Resources
+main = os.path.dirname(__file__)
+# icons = os.path.join(main, "icons")
+# images = os.path.join(main, "images")
 
-    # Datos del usuario
-    sex = input("Enter your gender, if you are Male (M) or if you are Female (F): ")
-    weight = float(input("Enter your weight in kg: "))
-    height = float(input("Enter your height in meters: "))
+# Init
+root = Tk()
+root.title("BMI")
+root.resizable(False,False)
+# root.iconbitmap(os.path.join(icons, "logo.ico"))
 
-    # Calculando el bmi
-    bmi = (weight / (height*2))
-    print(f"Your body mass index is: {bmi}")
+# Window Display Orentation Function (init)
+bg = LabelFrame(root, background="gray75")
+bg.pack(padx=10, pady=10, fill="both", expand=True)
 
-    if sex.lower() == "h":
-        if bmi >= 19 and bmi <= 24:
-            print("You are in a healthy weight")
-        elif bmi < 19:
-            print("You are below your ideal weight, try to eat more")
-        elif bmi > 24 and bmi < 29.1:
-            print("You are overweight, try to exercise regularly")
-        elif bmi > 29 and bmi < 39:
-            print("You are obese, go to a doctor, change your diet and exercise.")
-        elif bmi >= 39:
-            print("You need help urgently, go to the doctor now")
+vertical = Button(bg, text="Vertical", border=5, height=5, width=12, anchor="center",
+                  command=None)
+vertical.grid(row=0,column=0, padx=20, pady=20)
+horizontal = Button(bg, text="Horizontal", border=5, height=5, width=12, anchor="center",
+                    command=None)
+horizontal.grid(row=0,column=1, padx=20, pady=20)
 
+# Vertical Mode
 
-    if sex.lower() == "m":
-        if bmi > 18 and bmi <= 23:
-            print("You are in a healthy weight")
-        elif bmi <= 18:
-            print("You are below your ideal weight, try to eat more")
-        elif bmi > 23 and bmi < 28.1:
-            print("You are overweight, try to exercise regularly")
-        elif bmi > 28 and bmi < 38:
-            print("You are obese, go to a doctor, change your diet and exercise.")
-        elif bmi >= 38:
-            print("You need help urgently, go to the doctor now")
+# Horizontal Mode
+
+root.mainloop()
