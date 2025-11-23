@@ -10,7 +10,7 @@ def days_per_month(month, leap_year):
     return sum(days_of_month[:month-1])
 
 while True:
-    date = input("Enter date (dd-mm-aa): ")
+    date = input("Enter date (dd-mm-yy): ")
     patern = r"\d{1,2}-\d{1,2}-\d{1,}"  #   Date Format
     verify = re.match(patern,date)
     

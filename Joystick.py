@@ -1,7 +1,6 @@
 # Code created by BallaMOTO https://www.youtube.com/watch?v=AgHov-F_tKg&t=794s
 
-import serial
-import pydirectinput
+import serial, pydirectinput
 
 arduino = serial.Serial('COM4', 115200, timeout=0.1)     # serial input from arduino, change COM port
                                                         # to wherever your arduino is connected

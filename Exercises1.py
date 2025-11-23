@@ -1,33 +1,38 @@
 # Exercise 1
 # name = input("Enter your name: ")
-# print(f"{name.upper()} has {len(name)} letters")
+# print(f"{name.upper()} has {len(name)} letters.")
 
 # Exercise 2
 # phrase = input("Enter any phrase: ")
-# inverted_phrase = phrase[::-1]
-# print(inverted_phrase)
+# reversed_phrase = phrase[::-1]
+# print(reversed_phrase)
 
 # Exercise 3
 # email = input("Enter your email: ")
 # print(email[:email.find('@')] + '@ceu.es')
 
 # Exercise 4
-# purchases = input("Enter your shopping list, products must be separated by commas: ")
+# purchases = input("Enter your shopping list (items separated by commas): ")
 # print(purchases.replace(",", "\n"))
 
 # Exercise 5
 # product = input("Product name: ")
 # price = float(input("Product price: "))
 # units = int(input("Number of units: "))
-# print(f"{product.capitalize()} : {units} units x {round(price,2)}$ = {round(price*units,2)}$")
+# total = price * units
+# print(f"{product.capitalize()}: {units} unit(s) x ${price:.2f} = ${total:.2f}")
 
 # Exercise 6
 # age = int(input("Enter your age: "))
-# if age>=18: print("You are older than age")
-# elif age<18: print("You are younger than age")
+# if age >= 18:
+#     print("You are 18 or older.")
+# else:
+#     print("You are under 18.")
 
 # Exercise 7
 # password = "hello123xd"
 # verify = input("Enter password: ")
-# if password==verify.lower(): print("Both passwords match")
-# else: print("The passwords do not match")
+# if password == verify:
+#     print("Passwords match.")
+# else:
+#     print("Passwords do not match.")

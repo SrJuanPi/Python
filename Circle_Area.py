@@ -1,4 +1,4 @@
-# Calculando el area de un circulo
+# Calculating the area of a circle
 
 from math import pi
 
