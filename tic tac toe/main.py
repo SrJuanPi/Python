@@ -1,36 +1,33 @@
-# Horizontales
-def horizontal_solutions(tablero):
-    if tablero[0][0] == tablero[0][1] == tablero[0][2] and tablero[0][0] in ("X", "O"):
-        return True
-    elif tablero[1][0] == tablero[1][1] == tablero[1][2] and tablero[1][0] in ("X", "O"):
-        return True
-    elif tablero[2][0] == tablero[2][1] == tablero[2][2] and tablero[2][0] in ("X", "O"):
-        return True
-    else:
-        return False
-    
-# Verticales
-def vertical_solutions(tablero):
-    if tablero[0][0] == tablero[1][0] == tablero[2][0] and tablero[0][0] in ("X", "O"):
-        return True
-    elif tablero[0][1] == tablero[1][1] == tablero[2][1] and tablero[0][1] in ("X", "O"):
-        return True
-    elif tablero[0][2] == tablero[1][2] == tablero[2][2] and tablero[0][2] in ("X", "O"):
-        return True
-    else:
-        return False
-    
-# Diagonales
-def diagonal_solutions(tablero):
-    if tablero[0][0] == tablero[1][1] == tablero[2][2] and tablero[0][0] in ("X", "O"):
-        return True
-    elif tablero[0][2] == tablero[1][1] == tablero[2][0] and tablero[0][2] in ("X", "O"):
-        return True
-    else:
-        return False
+# Constantes
+SIMBOLO_X = "X"
+SIMBOLO_O = "O"
+CASILLAS_TOTALES = 9
+CASILLA_VACIA = ""
+
+tablero = [["","",""],
+           ["","",""],
+           ["","",""]]
+
+conversion = {
+    1 : [0,0],
+    2 : [0,1],
+    3 : [0,2],
+    4 : [1,0],
+    5 : [1,1],
+    6 : [1,2],
+    7 : [2,0],
+    8 : [2,1],
+    9 : [2,2],
+}
 
 # Mostrar Tablero
-def mostrar_tablero(tablero):
+def mostrar_tablero(tablero: list[list[str]]) -> None:
+    """
+    Muestra el tablero actual del juego en formato 3x3.
+    
+    Args:
+        tablero: Matriz 3x3 con símbolos "X", "O" o ""
+    """
     print(f"""
  {tablero[0][0]} | {tablero[0][1]} | {tablero[0][2]}
 -----------
@@ -40,21 +37,96 @@ def mostrar_tablero(tablero):
 """)
 
 # Empate
-def empate(tablero):
-    if tablero[0][0] and tablero[0][1] and tablero[0][2] and tablero[1][0] and tablero[1][1] and tablero[1][2] and tablero[2][0] and tablero[2][1] and tablero[2][2] in ("X", "O"):
-        return True
+def empate(tablero: list[list[str]]) -> bool:
+    """
+    Verifica si hay empate (tablero lleno sin ganador).
+    
+    Args:
+        tablero: Matriz 3x3 con símbolos "X", "O" o ""
+    
+    Returns:
+        True si todas las casillas están ocupadas, False en caso contrario
+    """
+    return all(celda in (SIMBOLO_X, SIMBOLO_O) for fila in tablero for celda in fila)
+
+# Obtener Jugada
+def obtener_jugada(simbolo: str) -> None:
+    """
+    Solicita al jugador una casilla válida y la marca en el tablero.
+    Muestra el tablero después de la jugada.
+    
+    Args:
+        simbolo: "X" o "O" del jugador actual
+    """
+    while True:
+        try: 
+            jugador = int(input(f"Jugador ({simbolo}) Seleccione una casilla del 1 al 9: "))
+            if jugador < 1 or jugador > CASILLAS_TOTALES:
+                print(f"Por favor ingrese un número entre 1 y {CASILLAS_TOTALES}.")
+                continue
+        except ValueError:
+            print(f"Jugador ({simbolo}), por favor ingrese un número válido (1-9)")
+            continue
+        
+        jugador_coords = conversion[jugador]
+        
+        if tablero[jugador_coords[0]][jugador_coords[1]] in (SIMBOLO_X, SIMBOLO_O):
+            print("No puedes marcar esta casilla porque ya fue jugada, por favor selecciona otra casilla.")
+            continue
+        
+        tablero[jugador_coords[0]][jugador_coords[1]] = simbolo
+        mostrar_tablero(tablero)
+        break
+
+# Detectar ganador
+def ganador(tablero: list[list[str]]) -> str | None:
+    """
+    Verifica si hay un ganador en el tablero.
+    
+    Args:
+        tablero: Matriz 3x3 con símbolos "X", "O" o ""
+    
+    Returns:
+        "X" o "O" si hay ganador, None en caso contrario
+    """
+    # Verificar horizontales
+    for fila in tablero:
+        if fila[0] == fila[1] == fila[2] and fila[0] in (SIMBOLO_X, SIMBOLO_O):
+            return fila[0]
+    
+    # Verificar verticales
+    for col in range(3):
+        if tablero[0][col] == tablero[1][col] == tablero[2][col] and tablero[0][col] in (SIMBOLO_X, SIMBOLO_O):
+            return tablero[0][col]
+    
+    # Verificar diagonal principal
+    if tablero[0][0] == tablero[1][1] == tablero[2][2] and tablero[0][0] in (SIMBOLO_X, SIMBOLO_O):
+        return tablero[0][0]
+    
+    # Verificar diagonal secundaria
+    if tablero[0][2] == tablero[1][1] == tablero[2][0] and tablero[0][2] in (SIMBOLO_X, SIMBOLO_O):
+        return tablero[0][2]
+    
+    return None
+
+# Finalizar juego
+def finalizar_juego(simbolo_ganador: str | None) -> None:
+    """
+    Muestra el tablero final y el resultado del juego.
+    
+    Args:
+        simbolo_ganador: "X" o "O" si hay ganador, None si hay empate
+    """
+    if simbolo_ganador:
+        print(f"¡Jugador ({simbolo_ganador}) ha ganado el juego!")
     else:
-        return False
+        print("¡Empate!")
 
-# Verificar
-def verificacion(h,v,d):
-    if h: return True
-    elif v: return True
-    elif d: return True
-    else: return False
-
-
-def main():
+# Main
+def main() -> None:
+    """
+    Función principal que controla el flujo del juego Tic Tac Toe.
+    """
     print("""
 Bienvenidos a Tic Tac Python, el juego de Tic Tac Toe más sencillo
 y aburrido posible hecho en python!
@@ -68,83 +140,31 @@ y aburrido posible hecho en python!
 ¡A Jugar!
 """)
     
-    tablero = [["","",""],
-               ["","",""],
-               ["","",""]]
-    # Inputs
-    conversion = {
-    1 : [0,0],
-    2 : [0,1],
-    3 : [0,2],
-    4 : [1,0],
-    5 : [1,1],
-    6 : [1,2],
-    7 : [2,0],
-    8 : [2,1],
-    9 : [2,2],
-}
+    mostrar_tablero(tablero)
     
     while True:
-        mostrar_tablero(tablero=tablero)
-        
         # JUGADOR 1
-        while True:
-            try: 
-                jugador1 = int(input("Jugador 1 (X) Seleccione una casilla del 1 al 9: "))
-                if jugador1 < 1 or jugador1 > 9:
-                    print("Por favor ingrese un número entre 1 y 9.")
-                    continue
-            except:
-                print("Jugador 1 (X), por favor ingrese un número válido (1-9)")
-                continue
-            
-            jugador1 = conversion[jugador1]
-            
-            if tablero[jugador1[0]][jugador1[1]] in ("X", "O"):
-                print("No puedes marcar esta casilla porque ya fue jugada, por favor selecciona otra casilla.")
-                continue
-            
-            tablero[jugador1[0]][jugador1[1]] = "X"
+        obtener_jugada(SIMBOLO_X)
+        ganador_actual = ganador(tablero)
+        
+        if ganador_actual:
+            finalizar_juego(ganador_actual)
             break
         
-        if empate(tablero=tablero) == True:
-            mostrar_tablero(tablero=tablero)
-            print("Empate.")
+        if empate(tablero):
+            finalizar_juego(None)
             break
-        if verificacion(horizontal_solutions(tablero), vertical_solutions(tablero), diagonal_solutions(tablero)):
-            mostrar_tablero(tablero=tablero)
-            print("Jugador 1 (X) ha ganado el juego.")
-            break
-        
-        mostrar_tablero(tablero=tablero)
         
         # JUGADOR 2
-        while True:
-            try:
-                jugador2 = int(input("Jugador 2 (O) Seleccione una casilla del 1 al 9: "))
-                if jugador2 < 1 or jugador2 > 9:
-                    print("Por favor ingrese un número entre 1 y 9.")
-                    continue
-            except:
-                print("Jugador 2 (O), por favor ingrese un número válido (1-9)")
-                continue
-            
-            jugador2 = conversion[jugador2]
-            
-            if tablero[jugador2[0]][jugador2[1]] in ("X", "O"):
-                print("No puedes marcar esta casilla porque ya fue jugada, por favor selecciona otra casilla.")
-                continue
-            
-            tablero[jugador2[0]][jugador2[1]] = "O"
+        obtener_jugada(SIMBOLO_O)
+        ganador_actual = ganador(tablero)
+        
+        if ganador_actual:
+            finalizar_juego(ganador_actual)
             break
         
-        if empate(tablero=tablero) == True:
-            mostrar_tablero(tablero=tablero)
-            print("Empate.")
-            break
-        if verificacion(horizontal_solutions(tablero), vertical_solutions(tablero), diagonal_solutions(tablero)):
-            mostrar_tablero(tablero=tablero)
-            print("Jugador 2 (O) ha ganado el juego.")
+        if empate(tablero):
+            finalizar_juego(None)
             break
 
 if __name__ == "__main__":
