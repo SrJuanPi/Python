@@ -39,6 +39,13 @@ def mostrar_tablero(tablero):
  {tablero[2][0]} | {tablero[2][1]} | {tablero[2][2]}
 """)
 
+# Empate
+def empate(tablero):
+    if tablero[0][0] and tablero[0][1] and tablero[0][2] and tablero[1][0] and tablero[1][1] and tablero[1][2] and tablero[2][0] and tablero[2][1] and tablero[2][2] in ("X", "O"):
+        return True
+    else:
+        return False
+
 # Verificar
 def verificacion(h,v,d):
     if h: return True
@@ -46,14 +53,15 @@ def verificacion(h,v,d):
     elif d: return True
     else: return False
 
+
 def main():
     print("""
 Bienvenidos a Tic Tac Python, el juego de Tic Tac Toe más sencillo
 y aburrido posible hecho en python!
 
-- Las reglas son simples, hay 9 casillas en el tablero, de arriba a abajo y
-  de izquierda a derecha.
-- Cada jugador le corresponde un turno y sólo puede escoger una casilla a la vez.
+- Las reglas son simples, hay 9 casillas en el tablero, 3 de arriba a abajo y
+  3 de izquierda a derecha.
+- En cada turno el jugador solo puede escoger una casilla para marcar.
 - El jugador 1 siempre es X y el jugador 2 siempre es O.
 - El juego termina si uno de los jugadores hace 3 en raya o hay empate.
 
@@ -99,6 +107,10 @@ y aburrido posible hecho en python!
             tablero[jugador1[0]][jugador1[1]] = "X"
             break
         
+        if empate(tablero=tablero) == True:
+            mostrar_tablero(tablero=tablero)
+            print("Empate.")
+            break
         if verificacion(horizontal_solutions(tablero), vertical_solutions(tablero), diagonal_solutions(tablero)):
             mostrar_tablero(tablero=tablero)
             print("Jugador 1 (X) ha ganado el juego.")
@@ -126,6 +138,10 @@ y aburrido posible hecho en python!
             tablero[jugador2[0]][jugador2[1]] = "O"
             break
         
+        if empate(tablero=tablero) == True:
+            mostrar_tablero(tablero=tablero)
+            print("Empate.")
+            break
         if verificacion(horizontal_solutions(tablero), vertical_solutions(tablero), diagonal_solutions(tablero)):
             mostrar_tablero(tablero=tablero)
             print("Jugador 2 (O) ha ganado el juego.")
