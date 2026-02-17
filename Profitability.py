@@ -1,99 +1,167 @@
-# Program that calculates the Profitability of a Product
+"""
+Profitability Analysis Module.
 
-def calculate_profitability():
-    print("Is this product profitable for me?")
-    print("Profitability scale: x/25 — final value as a percentage %\n")
+Analyzes project profitability with financial calculations and reporting.
+"""
 
-    # Product data
-    capital = float(input("Enter your available capital in USD: "))
-    price = float(input("Enter the product price in USD: "))
-    score = 0
+from typing import List, Dict
+from utils import get_valid_input
 
-    durability = int(input("""
-Durability options:
 
-1) 1 month or less
-2) more than 1 month and less than 6 months
-3) more than 6 months and less than 1 year
-4) more than 1 year and less than 3 years
-5) 3 years or more
+class ProjectAnalysis:
+    """Analyzes project financial metrics."""
+    
+    def __init__(self, name: str, investment: float) -> None:
+        """
+        Initialize project analysis.
+        
+        Args:
+            name: Project name
+            investment: Initial investment amount
+        """
+        self.name = name
+        self.investment = investment
+        self.revenues: List[float] = []
+        self.costs: List[float] = []
+    
+    def add_revenue(self, amount: float, period: int = 1) -> bool:
+        """
+        Add revenue for a period.
+        
+        Args:
+            amount: Revenue amount
+            period: Period number
+            
+        Returns:
+            True if added successfully
+        """
+        if amount < 0:
+            print("Error: Revenue cannot be negative")
+            return False
+        
+        self.revenues.append(amount)
+        print(f"Added revenue: ${amount:.2f}")
+        return True
+    
+    def add_cost(self, amount: float) -> bool:
+        """
+        Add operating cost.
+        
+        Args:
+            amount: Cost amount
+            
+        Returns:
+            True if added successfully
+        """
+        if amount < 0:
+            print("Error: Cost cannot be negative")
+            return False
+        
+        self.costs.append(amount)
+        print(f"Added cost: ${amount:.2f}")
+        return True
+    
+    def calculate_total_revenue(self) -> float:
+        """Calculate total revenue."""
+        return sum(self.revenues)
+    
+    def calculate_total_costs(self) -> float:
+        """Calculate total costs."""
+        return sum(self.costs)
+    
+    def calculate_net_profit(self) -> float:
+        """Calculate net profit."""
+        return self.calculate_total_revenue() - self.calculate_total_costs() - self.investment
+    
+    def calculate_roi(self) -> float:
+        """
+        Calculate Return on Investment (ROI).
+        
+        Returns:
+            ROI percentage
+        """
+        if self.investment == 0:
+            return 0
+        return (self.calculate_net_profit() / self.investment) * 100
+    
+    def calculate_payback_period(self) -> float:
+        """
+        Calculate payback period in periods.
+        
+        Returns:
+            Number of periods to recover investment
+        """
+        cumulative = 0
+        for i, revenue in enumerate(self.revenues):
+            cumulative += revenue - (self.calculate_total_costs() / len(self.revenues) if self.revenues else 0)
+            if cumulative >= self.investment:
+                return i + 1
+        return -1
+    
+    def generate_report(self) -> None:
+        """Generate profitability report."""
+        print(f"\n=== Profitability Report: {self.name} ===")
+        print(f"Initial Investment: ${self.investment:.2f}")
+        print(f"Total Revenue: ${self.calculate_total_revenue():.2f}")
+        print(f"Total Costs: ${self.calculate_total_costs():.2f}")
+        print(f"Net Profit: ${self.calculate_net_profit():.2f}")
+        print(f"ROI: {self.calculate_roi():.2f}%")
+        
+        payback = self.calculate_payback_period()
+        if payback > 0:
+            print(f"Payback Period: {payback:.1f} periods")
+        else:
+            print("Payback Period: Not achieved")
+        
+        if self.calculate_net_profit() > 0:
+            print("Status: ✓ PROFITABLE")
+        else:
+            print("Status: ✗ NOT PROFITABLE")
+        print()
 
-Select (1-5): """))
 
-    offer = int(input("""
-Product offer compared to alternatives:
+def main() -> None:
+    """Main function to run profitability analysis."""
+    print("=== Profitability Analysis Tool ===\n")
+    
+    project_name = input("Project name: ").strip()
+    investment = get_valid_input("Initial investment: $", float)
+    
+    if investment is None or investment < 0:
+        print("Error: Invalid investment amount")
+        return
+    
+    project = ProjectAnalysis(project_name, investment)
+    
+    while True:
+        print("\nMenu:")
+        print("1. Add revenue")
+        print("2. Add cost")
+        print("3. Generate report")
+        print("4. Exit")
+        
+        choice = input("\nSelect an option (1-4): ").strip()
+        
+        if choice == '1':
+            amount = get_valid_input("Revenue amount: $", float)
+            if amount is not None:
+                project.add_revenue(amount)
+        
+        elif choice == '2':
+            amount = get_valid_input("Cost amount: $", float)
+            if amount is not None:
+                project.add_cost(amount)
+        
+        elif choice == '3':
+            project.generate_report()
+        
+        elif choice == '4':
+            print("Goodbye!")
+            break
+        
+        else:
+            print("Invalid option. Please try again.")
 
-1) Offers less than other alternatives
-2) Offers a little less than other alternatives
-3) Offers the same as other alternatives
-4) Offers a little more than other alternatives
-5) Offers more than other alternatives
-
-Select (1-5): """))
-
-    location = int(input("""
-Where the product can be purchased:
-
-1) Mini market or supermarket
-2) Shopping center
-3) International purchase
-4) Online store
-5) Dedicated shop
-
-Select (1-5): """))
-
-    need = int(input("""
-Do you really need this product?
-
-1) I don't need this product
-2) Occasional use
-3) Useful but can live without it
-4) Useful for me
-5) Basic necessity
-
-Select (1-5): """))
-
-    # Price/Capital score
-    if price < (capital * 0.2):
-        score = 5
-    elif price < (capital * 0.5):
-        score = 4
-    elif price == (capital * 0.5):
-        score = 3
-    elif price < (capital * 0.8):
-        score = 2
-    elif price < capital:
-        score = 1
-        print("Not worth it — you'll be left with little money.")
-    elif price > capital:
-        print("NOT WORTH IT — YOU WILL END UP IN DEBT.")
-    else:
-        print("Invalid value, please enter a numeric value.")
-
-    # Add scores for the other categories (validate 1-5)
-    if 1 <= durability <= 5:
-        score += durability
-    else:
-        print("Invalid durability value, please enter a number 1-5.")
-
-    if 1 <= offer <= 5:
-        score += offer
-    else:
-        print("Invalid offer value, please enter a number 1-5.")
-
-    if 1 <= location <= 5:
-        score += location
-    else:
-        print("Invalid location value, please enter a number 1-5.")
-
-    if 1 <= need <= 5:
-        score += need
-    else:
-        print("Invalid need value, please enter a number 1-5.")
-
-    # Calculate percentage (max score = 25)
-    profitability_percent = (score / 25) * 100
-    print(f"The product profitability is: {round(profitability_percent, 2)}%")
 
 if __name__ == "__main__":
-    calculate_profitability()
+    main()

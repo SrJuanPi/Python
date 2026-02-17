@@ -1,40 +1,95 @@
-import re
-# for birthday in range(1, 367):
-#     if birthday == 163:                   original idea
-#         print("Happy Birthday!")
+"""
+Date of Year Calculator Module.
 
-def is_leap_year(year):  #  Improvemet made wiht gpt-4
-    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
-def days_per_month(month, leap_year):
-    days_of_month = [31, 29 if leap_year else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    return sum(days_of_month[:month-1])
+Determines which day of the year a given date is, accounting for leap years.
+"""
 
-while True:
-    date = input("Enter date (dd-mm-yy): ")
-    patern = r"\d{1,2}-\d{1,2}-\d{1,}"  #   Date Format
-    verify = re.match(patern,date)
+from datetime import datetime
+from typing import Optional
+from utils import validate_date
+
+
+def get_day_of_year(date: datetime) -> int:
+    """
+    Get the day number in the year for a given date.
     
-    if verify:
-        dates = date.split("-")
-        if len(dates) > 3:
-            print("\nInvalid date format, please try again.\n")
-            continue
-        day = int(dates[0])
-        month = int(dates[1])      #  Separate day, month and year
-        year = int(dates[2])
-        leap_year = is_leap_year(year)
+    Args:
+        date: datetime object
         
-        if (1 <= day <= 31 and 1 <= month <= 12 and year >= 0):
-            if (month == 2 and ((leap_year and day <= 29) or (not leap_year and day <= 28))) or \
-               (month in [4, 6, 9, 11] and day <= 30) or \
-               (month in [1, 3, 5, 7, 8, 10, 12] and day <= 31): break
-        else:
-            print("\nInvalid date format, please try again.\n")
-            continue
-    else:
-        print("\nInvalid date format, please try again.\n")
-        continue
+    Returns:
+        Day number (1-366)
+    """
+    year_start = datetime(date.year, 1, 1)
+    day_of_year = (date - year_start).days + 1
+    return day_of_year
 
-day_of_year = days_per_month(month, leap_year) + day
-total_days = 366 if leap_year else 365
-print(f"Date: {date}\nDay of the year: {day_of_year} of {total_days}\nDays remaining: {total_days - day_of_year}")
+
+def is_leap_year(year: int) -> bool:
+    """
+    Check if a year is a leap year.
+    
+    Args:
+        year: Year to check
+        
+    Returns:
+        True if leap year, False otherwise
+    """
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+
+def get_days_in_year(year: int) -> int:
+    """
+    Get total days in a year.
+    
+    Args:
+        year: Year to check
+        
+    Returns:
+        365 or 366 for leap years
+    """
+    return 366 if is_leap_year(year) else 365
+
+
+def display_date_info(date: datetime, day_of_year: int) -> None:
+    """
+    Display date information in formatted way.
+    
+    Args:
+        date: datetime object
+        day_of_year: Day number in year
+    """
+    total_days = get_days_in_year(date.year)
+    remaining_days = total_days - day_of_year
+    leap_status = "leap year" if is_leap_year(date.year) else "regular year"
+    
+    print(f"\n--- Date Information ---")
+    print(f"Date: {date.strftime('%d/%m/%Y (%A)')}")
+    print(f"Day of year: {day_of_year} of {total_days}")
+    print(f"Remaining days: {remaining_days}")
+    print(f"Year type: {leap_status}")
+    print(f"Progress: {(day_of_year / total_days * 100):.1f}%\n")
+
+
+def main() -> None:
+    """Main function to run the date of year calculator."""
+    print("=== Date of Year Calculator ===\n")
+    
+    while True:
+        date_input = input("Enter a date (DD/MM/YYYY) or 'q' to quit: ").strip()
+        
+        if date_input.lower() == 'q':
+            print("Goodbye!")
+            break
+        
+        date = validate_date(date_input)
+        
+        if date is None:
+            print("Error: Invalid date format. Please use DD/MM/YYYY\n")
+            continue
+        
+        day_of_year = get_day_of_year(date)
+        display_date_info(date, day_of_year)
+
+
+if __name__ == "__main__":
+    main()
